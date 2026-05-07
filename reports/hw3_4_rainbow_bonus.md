@@ -1,11 +1,4 @@
-# HW3-4 Bonus Report (Rainbow DQN on Random Mode)
-
-## 0) Progress Status
-
-- [x] Rainbow subset definition finalized
-- [x] Training pipeline complete
-- [x] Result comparison complete
-- [x] Bonus conclusion finalized
+﻿# HW3-4 Bonus Report (Rainbow DQN on Random Mode)
 
 ## 1) Components Implemented
 

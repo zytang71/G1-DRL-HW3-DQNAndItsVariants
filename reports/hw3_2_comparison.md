@@ -1,11 +1,4 @@
-# HW3-2 Comparison Report (Double DQN vs Dueling DQN)
-
-## 0) Progress Status
-
-- [x] Double DQN training complete
-- [x] Dueling DQN training complete
-- [x] Comparison table finalized
-- [x] Conclusion finalized
+﻿# HW3-2 Comparison Report (Double DQN vs Dueling DQN)
 
 ## 1) Experiment Setup
 

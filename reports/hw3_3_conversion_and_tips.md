@@ -1,11 +1,4 @@
-# HW3-3 Conversion and Training Tips Report
-
-## 0) Progress Status
-
-- [x] Framework conversion complete
-- [x] Stabilization tips integrated
-- [x] Random mode training complete
-- [x] Analysis finalized
+﻿# HW3-3 Conversion and Training Tips Report
 
 ## 1) Framework Conversion
 

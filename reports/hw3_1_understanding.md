@@ -1,4 +1,4 @@
-# HW3-1 Understanding Report (Naive DQN + Replay, Static Mode)
+﻿# HW3-1 Understanding Report (Naive DQN + Replay, Static Mode)
 
 ## 1) Environment and Setup
 

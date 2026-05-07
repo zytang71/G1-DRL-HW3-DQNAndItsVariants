@@ -1,4 +1,4 @@
-# HW3 Execution Architecture (DQN and Variants)
+﻿﻿# HW3 Execution Architecture (DQN and Variants)
 
 ## 1) Scope
 
@@ -164,29 +164,25 @@ For each task, keep at least:
 
 `HW3-1`
 
-- [ ] Naive DQN runs in `static` mode
-- [ ] Experience Replay is used
-- [ ] Short understanding report is complete
+- [x] Naive DQN runs in `static` mode
+- [x] Experience Replay is used
+- [x] Short understanding report is complete
 
 `HW3-2`
 
-- [ ] Double DQN is implemented
-- [ ] Dueling DQN is implemented
-- [ ] Comparison with Naive DQN is complete
+- [x] Double DQN is implemented
+- [x] Dueling DQN is implemented
+- [x] Comparison with Naive DQN is complete
 
 `HW3-3`
 
-- [ ] Converted to Keras or PyTorch Lightning
-- [ ] At least one stabilization tip is integrated
-- [ ] Results and analysis are documented
+- [x] Converted to Keras or PyTorch Lightning
+- [x] At least one stabilization tip is integrated
+- [x] Results and analysis are documented
 
 `HW3-4 Bonus`
 
-- [ ] Rainbow DQN (or subset) runs in `random` mode
-- [ ] Bonus comparison and discussion are documented
+- [x] Rainbow DQN (or subset) runs in `random` mode
+- [x] Bonus comparison and discussion are documented
 
-## 7) Immediate Next Actions
 
-1. Start HW3-1 by extracting the Naive DQN and replay logic from `base/Ch3_book.ipynb` into `src/hw3_1_naive_dqn_static.py`.
-2. Create `reports/hw3_1_understanding.md` with sections: background, algorithm flow, observations, open questions.
-3. Reuse the same training loop skeleton to build HW3-2 variants for fair comparison.
