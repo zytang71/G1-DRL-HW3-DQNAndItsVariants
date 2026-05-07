@@ -1,5 +1,12 @@
 # HW3-3 Conversion and Training Tips Report
 
+## 0) Progress Status
+
+- [ ] Framework conversion complete
+- [ ] Stabilization tips integrated
+- [ ] Random mode training complete
+- [ ] Analysis finalized
+
 ## 1) Framework Conversion
 
 - Selected framework (Keras or PyTorch Lightning):
@@ -22,3 +29,8 @@
 
 - Did conversion preserve behavior:
 - Which tips were effective:
+
+## 5) Raw Result References
+
+- Run dir:
+- Config file:

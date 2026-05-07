@@ -1,5 +1,12 @@
 # HW3-4 Bonus Report (Rainbow DQN on Random Mode)
 
+## 0) Progress Status
+
+- [ ] Rainbow subset definition finalized
+- [ ] Training pipeline complete
+- [ ] Result comparison complete
+- [ ] Bonus conclusion finalized
+
 ## 1) Components Implemented
 
 - Double DQN:
@@ -23,3 +30,8 @@
 
 - Overall gain:
 - Remaining limitations:
+
+## 5) Raw Result References
+
+- Run dir:
+- Baselines used:

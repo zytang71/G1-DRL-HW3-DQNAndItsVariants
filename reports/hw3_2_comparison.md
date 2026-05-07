@@ -1,5 +1,12 @@
 # HW3-2 Comparison Report (Double DQN vs Dueling DQN)
 
+## 0) Progress Status
+
+- [ ] Double DQN training complete
+- [ ] Dueling DQN training complete
+- [ ] Comparison table finalized
+- [ ] Conclusion finalized
+
 ## 1) Experiment Setup
 
 - Shared settings:
@@ -23,3 +30,9 @@
 
 - Which variant is better in player mode:
 - Why:
+
+## 5) Raw Result References
+
+- Double run dir:
+- Dueling run dir:
+- Baseline (HW3-1) run dir: `runs/hw3_1`
