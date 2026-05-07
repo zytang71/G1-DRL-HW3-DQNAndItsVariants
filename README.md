@@ -121,13 +121,16 @@
 
 ## 3-4
 
-實作 Rainbow 子集（Double + Dueling + Prioritized Replay），在 random 環境進行 bonus 驗證。
+實作完整 Rainbow DQN，在 random 環境進行 bonus 驗證。
 
 ### 實作內容
 
-- Double target
-- Dueling network
+- Double DQN
 - Prioritized Replay（含 IS weight 修正）
+- Dueling network
+- N-step return
+- Distributional RL（C51）
+- NoisyNet
 - 環境：random mode
 
 ### 設定摘要
@@ -140,20 +143,23 @@
 | Learning rate | 0.0005 |
 | PER alpha | 0.6 |
 | PER beta | 0.4 -> 1.0 |
+| N-step | 3 |
+| C51 atoms | 51 |
+| C51 support | [-40, 10] |
 | Device | cuda |
 
 ### 結果
 
 | 指標 | 數值 |
 |---|---:|
-| Eval win rate | 0.10 |
-| Eval avg reward | -30.12 |
-| Last-100 win rate | 0.18 |
-| Last-100 avg reward | -25.57 |
+| Eval win rate | 0.08 |
+| Eval avg reward | -29.16 |
+| Last-100 win rate | 0.23 |
+| Last-100 avg reward | -20.27 |
 
 ### 分析重點
 
-工程上已完成 Rainbow 子集整合，但在這次 random 設定下沒有超過 Part 3，顯示仍需更完整 Rainbow 元件與更細緻調參。
+工程上已完成完整 Rainbow 整合，但在這次 random 設定下仍未超過 3-3，顯示 random mode 對超參數與訓練配置高度敏感。
 
 ---
 
@@ -161,23 +167,23 @@
 
 | 部分 | Episodes | Eval Win Rate | Eval Avg Reward | Last-100 Win Rate | Last-100 Avg Reward |
 |---|---:|---:|---:|---:|---:|
-| Part 1（static baseline） | 1000 | 1.00 | 4.00 | 0.99 | 2.48 |
-| Part 2（player, Double） | 1500 | 1.00 | 6.54 | 1.00 | 6.17 |
-| Part 2（player, Dueling） | 1500 | 1.00 | 6.98 | 1.00 | 6.44 |
-| Part 3（random, Lightning） | 1200 | 0.14 | -22.22 | 0.26 | -19.00 |
-| Part 4（random, Rainbow subset） | 1800 | 0.10 | -30.12 | 0.18 | -25.57 |
+| 3-1（static baseline） | 1000 | 1.00 | 4.00 | 0.99 | 2.48 |
+| 3-2（player, Double） | 1500 | 1.00 | 6.54 | 1.00 | 6.17 |
+| 3-2（player, Dueling） | 1500 | 1.00 | 6.98 | 1.00 | 6.44 |
+| 3-3（random, Lightning） | 1200 | 0.14 | -22.22 | 0.26 | -19.00 |
+| 3-4（random, Full Rainbow） | 1800 | 0.08 | -29.16 | 0.23 | -20.27 |
 
 ### 總結
 
 - 在 static / player 環境，DQN 與其變體能穩定收斂，其中 Dueling 在 player 表現最佳。
 - random 環境難度明顯更高；目前最好的 random 結果是 Part 3。
-- Rainbow 子集已完成實作，但要在 random mode 取得實質提升，仍需要下一輪超參數與方法擴充。
+- 完整 Rainbow 已完成實作，但要在 random mode 取得實質提升，仍需要微調超參數與方法擴充。
 
 ---
 
 ## 結果檔案位置
 
-- Part 1: `runs/hw3_1/`
-- Part 2: `runs/hw3_2/double/`, `runs/hw3_2/dueling/`
-- Part 3: `runs/hw3_3/`
-- Part 4: `runs/hw3_4_bonus/`
+- 3-1: `runs/hw3_1/`
+- 3-2: `runs/hw3_2/double/`, `runs/hw3_2/dueling/`
+- 3-3: `runs/hw3_3/`
+- 3-4: `runs/hw3_4_bonus/`
