@@ -1,0 +1,30 @@
+{
+  "config": {
+    "episodes": 1200,
+    "max_steps_per_episode": 30,
+    "seed": 42,
+    "gamma": 0.9,
+    "learning_rate": 0.001,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.02,
+    "epsilon_decay_steps": 2000,
+    "replay_capacity": 3000,
+    "batch_size": 64,
+    "target_sync_every": 50,
+    "eval_episodes": 50,
+    "grad_clip_norm": 1.0,
+    "scheduler_step_size": 500,
+    "scheduler_gamma": 0.5,
+    "framework": "pytorch_lightning",
+    "device": "auto",
+    "run_dir": "runs/hw3_3",
+    "model_path": "runs/hw3_3/model.pt"
+  },
+  "framework": "pytorch_lightning",
+  "episodes_collected": 1672,
+  "final_train_reward": -30.0,
+  "final_train_win": 0.0,
+  "eval_win_rate": 0.14,
+  "eval_avg_reward": -22.22,
+  "device_used": "cuda:0"
+}
