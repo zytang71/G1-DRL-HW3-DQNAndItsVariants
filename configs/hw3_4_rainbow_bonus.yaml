@@ -1,0 +1,22 @@
+task: hw3_4_rainbow_random_bonus
+env:
+  mode: random
+  size: 4
+  noise_scale: 0.01
+train:
+  seed: 42
+  episodes: 3000
+  gamma: 0.99
+  lr: 0.0005
+  epsilon_start: 1.0
+  epsilon_end: 0.01
+  epsilon_decay_steps: 3000
+rainbow:
+  use_double_dqn: true
+  use_dueling: true
+  use_prioritized_replay: true
+replay:
+  capacity: 5000
+  batch_size: 64
+output:
+  run_dir: runs/hw3_4_bonus

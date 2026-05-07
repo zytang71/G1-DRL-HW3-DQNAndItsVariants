@@ -1,0 +1,23 @@
+task: hw3_3_port_random
+framework: pytorch_lightning
+env:
+  mode: random
+  size: 4
+  noise_scale: 0.01
+train:
+  seed: 42
+  episodes: 2000
+  gamma: 0.9
+  lr: 0.001
+  epsilon_start: 1.0
+  epsilon_end: 0.02
+  epsilon_decay_steps: 2000
+  grad_clip_norm: 1.0
+  scheduler: step_lr
+  scheduler_step_size: 500
+  scheduler_gamma: 0.5
+replay:
+  capacity: 3000
+  batch_size: 64
+output:
+  run_dir: runs/hw3_3
