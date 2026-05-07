@@ -3,11 +3,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Tuple
+from pathlib import Path
+import sys
+from typing import Tuple, Union
 
 import numpy as np
 
-from base.Gridworld import Gridworld
+REPO_ROOT = Path(__file__).resolve().parents[2]
+BASE_DIR = REPO_ROOT / "base"
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+from Gridworld import Gridworld
 
 
 @dataclass
@@ -20,6 +27,8 @@ class EnvConfig:
 class GridWorldEnvAdapter:
     """Wraps the provided Gridworld API into reset/step helpers."""
 
+    ACTION_MAP = {0: "u", 1: "d", 2: "l", 3: "r"}
+
     def __init__(self, cfg: EnvConfig) -> None:
         self.cfg = cfg
         self.game = Gridworld(size=cfg.size, mode=cfg.mode)
@@ -28,9 +37,13 @@ class GridWorldEnvAdapter:
         self.game = Gridworld(size=self.cfg.size, mode=self.cfg.mode)
         return self._state_from_board()
 
-    def step(self, action: int) -> Tuple[np.ndarray, float, bool]:
-        reward = float(self.game.makeMove(action))
-        done = bool(reward != -1)
+    def step(self, action: Union[int, str]) -> Tuple[np.ndarray, float, bool]:
+        if isinstance(action, int):
+            action = self.ACTION_MAP[action]
+
+        self.game.makeMove(action)
+        reward = float(self.game.reward())
+        done = bool(reward != -1.0)
         next_state = self._state_from_board()
         return next_state, reward, done
 

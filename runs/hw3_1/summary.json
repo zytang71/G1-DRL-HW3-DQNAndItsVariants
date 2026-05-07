@@ -1,0 +1,24 @@
+{
+  "config": {
+    "episodes": 1000,
+    "max_steps_per_episode": 30,
+    "seed": 42,
+    "gamma": 0.9,
+    "learning_rate": 0.001,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.1,
+    "epsilon_decay_steps": 1000,
+    "use_replay": true,
+    "replay_capacity": 1000,
+    "batch_size": 64,
+    "eval_episodes": 50,
+    "device": "auto",
+    "run_dir": "runs/hw3_1",
+    "model_path": "runs/hw3_1/naive_dqn_static.pt"
+  },
+  "final_train_reward": 2.0,
+  "final_train_win": 1.0,
+  "eval_win_rate": 1.0,
+  "eval_avg_reward": 4.0,
+  "device_used": "cuda"
+}
