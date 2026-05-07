@@ -1,0 +1,40 @@
+{
+  "config": {
+    "episodes": 1200,
+    "max_steps_per_episode": 35,
+    "seed": 42,
+    "gamma": 0.95,
+    "learning_rate": 0.0002,
+    "target_sync_every": 150,
+    "replay_capacity": 5000,
+    "batch_size": 64,
+    "per_alpha": 0.6,
+    "per_beta_start": 0.4,
+    "per_beta_end": 1.0,
+    "per_beta_steps": 2400,
+    "grad_clip_norm": 0.5,
+    "scheduler_step_size": 4000,
+    "scheduler_gamma": 0.9,
+    "n_step": 3,
+    "atom_size": 51,
+    "v_min": -50.0,
+    "v_max": 10.0,
+    "eval_episodes": 50,
+    "device": "auto",
+    "run_dir": "runs/hw3_4_tune_b",
+    "model_path": "runs/hw3_4_tune_b/model.pt"
+  },
+  "rainbow_components": [
+    "double_dqn",
+    "prioritized_replay",
+    "dueling_network",
+    "n_step_return",
+    "distributional_c51",
+    "noisynet"
+  ],
+  "final_train_reward": 10.0,
+  "final_train_win": 1.0,
+  "eval_win_rate": 0.28,
+  "eval_avg_reward": -15.24,
+  "device_used": "cuda"
+}

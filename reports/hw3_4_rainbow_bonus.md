@@ -1,8 +1,8 @@
-﻿# HW3-4 Bonus Report (Full Rainbow DQN on Random Mode)
+# 3-4 Full Rainbow on Random Mode
 
-## 1) Components Implemented
+## 1) Implemented Components
 
-This version includes all core Rainbow components:
+This implementation includes all Rainbow core components:
 
 - Double DQN
 - Prioritized Experience Replay (PER)
@@ -11,7 +11,7 @@ This version includes all core Rainbow components:
 - Distributional RL (C51)
 - NoisyNet exploration
 
-## 2) Experiment Setup
+## 2) Baseline Setup
 
 - Environment: `random` mode
 - Episodes: `1800`
@@ -25,47 +25,45 @@ This version includes all core Rainbow components:
 - Stabilization: gradient clipping + StepLR
 - Device: `cuda`
 
-## 3) Results
+Baseline result (`runs/hw3_4_bonus`):
 
 - Eval win rate: `0.08`
 - Eval avg reward: `-29.16`
-- Final train reward: `9.0`
 - Last-100 win rate: `0.23`
 - Last-100 avg reward: `-20.27`
 
-Additional statistics:
+## 3) Tuning Experiments
 
-- Best episode reward: `10.0`
-- Worst episode reward: `-44.0`
-- First-100 avg reward: `-22.18`
-- Last-100 avg loss: `3.277865`
+Tuning objective: improve evaluation generalization in random mode.
 
-## 4) Comparison
+| Run | Key changes | Eval win rate | Eval avg reward |
+|---|---|---:|---:|
+| `tune_a` | lower lr, lower gamma, slower target sync | 0.22 | -21.52 |
+| `tune_b` | slower scheduler decay, tighter grad clip | **0.28** | **-15.24** |
+| `tune_c` | higher n-step, higher PER alpha | 0.14 | -19.48 |
+| `tune_b` + longer training (1800) | same tuned direction, longer budget | 0.22 | -15.74 |
 
-Compared with 3-3 (random mode baseline):
+## 4) Final Adopted Configuration
 
-- 3-3 eval win rate: `0.14`
-- 3-4 eval win rate: `0.08`
-- 3-3 eval avg reward: `-22.22`
-- 3-4 eval avg reward: `-29.16`
+The best run is `tune_b` (`runs/hw3_4_tune_b`), and it is now set as the script default direction:
 
-Conclusion from this run:
+- Episodes: `1200`
+- `gamma=0.95`
+- `lr=0.0002`
+- Target sync every `150` episodes
+- `per_alpha=0.6`, `per_beta_steps=2400`
+- `grad_clip_norm=0.5`
+- Scheduler: `step_size=4000`, `gamma=0.9`
+- C51 support: `v_min=-50`, `v_max=10`
 
-- Full Rainbow implementation is complete and reproducible.
-- Under the current hyperparameters, full Rainbow did not outperform the 3-3 baseline on random mode.
-- The result indicates that random mode is highly sensitive to training schedule and replay dynamics.
+## 5) Takeaway
 
-## 5) Next Tuning Directions
-
-- Increase training budget and test slower beta annealing for PER.
-- Re-tune C51 support range (`v_min`, `v_max`) for this specific reward distribution.
-- Tune NoisyNet sigma initialization and target sync interval.
-- Add multi-seed averaging for robust comparison.
+- Full Rainbow is fully implemented and reproducible.
+- On this random-mode GridWorld, hyperparameters dominate final performance.
+- With tuning, Rainbow improved from `0.08` to `0.28` eval win rate, and from `-29.16` to `-15.24` eval average reward.
 
 ## 6) Artifacts
 
-- Run directory: `runs/hw3_4_bonus`
-- Key files:
-  - `runs/hw3_4_bonus/summary.json`
-  - `runs/hw3_4_bonus/train_metrics.csv`
-  - `runs/hw3_4_bonus/model.pt`
+- Baseline: `runs/hw3_4_bonus/`
+- Tuning: `runs/hw3_4_tune_a/`, `runs/hw3_4_tune_b/`, `runs/hw3_4_tune_c/`
+- Longer tuned run: `runs/hw3_4_tuned_final/`

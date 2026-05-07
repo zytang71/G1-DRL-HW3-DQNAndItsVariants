@@ -202,29 +202,29 @@ class NStepBuffer:
 
 @dataclass
 class TrainConfig:
-    episodes: int = 1800
+    episodes: int = 1200
     max_steps_per_episode: int = 35
     seed: int = 42
-    gamma: float = 0.99
-    learning_rate: float = 0.0005
-    target_sync_every: int = 50
+    gamma: float = 0.95
+    learning_rate: float = 0.0002
+    target_sync_every: int = 150
     replay_capacity: int = 5000
     batch_size: int = 64
     per_alpha: float = 0.6
     per_beta_start: float = 0.4
     per_beta_end: float = 1.0
-    per_beta_steps: int = 1800
-    grad_clip_norm: float = 1.0
-    scheduler_step_size: int = 600
-    scheduler_gamma: float = 0.5
+    per_beta_steps: int = 2400
+    grad_clip_norm: float = 0.5
+    scheduler_step_size: int = 4000
+    scheduler_gamma: float = 0.9
     n_step: int = 3
     atom_size: int = 51
-    v_min: float = -40.0
+    v_min: float = -50.0
     v_max: float = 10.0
     eval_episodes: int = 50
     device: str = "auto"
-    run_dir: str = "runs/hw3_4_bonus"
-    model_path: str = "runs/hw3_4_bonus/model.pt"
+    run_dir: str = "runs/hw3_4_tuned"
+    model_path: str = "runs/hw3_4_tuned/model.pt"
 
 
 def resolve_device(device_arg: str) -> torch.device:
@@ -516,29 +516,29 @@ def run_training(cfg: TrainConfig) -> None:
 
 def parse_args() -> TrainConfig:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--episodes", type=int, default=1800)
+    parser.add_argument("--episodes", type=int, default=1200)
     parser.add_argument("--max-steps", type=int, default=35)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--gamma", type=float, default=0.99)
-    parser.add_argument("--lr", type=float, default=0.0005)
-    parser.add_argument("--target-sync-every", type=int, default=50)
+    parser.add_argument("--gamma", type=float, default=0.95)
+    parser.add_argument("--lr", type=float, default=0.0002)
+    parser.add_argument("--target-sync-every", type=int, default=150)
     parser.add_argument("--replay-capacity", type=int, default=5000)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--per-alpha", type=float, default=0.6)
     parser.add_argument("--per-beta-start", type=float, default=0.4)
     parser.add_argument("--per-beta-end", type=float, default=1.0)
-    parser.add_argument("--per-beta-steps", type=int, default=1800)
-    parser.add_argument("--grad-clip-norm", type=float, default=1.0)
-    parser.add_argument("--scheduler-step-size", type=int, default=600)
-    parser.add_argument("--scheduler-gamma", type=float, default=0.5)
+    parser.add_argument("--per-beta-steps", type=int, default=2400)
+    parser.add_argument("--grad-clip-norm", type=float, default=0.5)
+    parser.add_argument("--scheduler-step-size", type=int, default=4000)
+    parser.add_argument("--scheduler-gamma", type=float, default=0.9)
     parser.add_argument("--n-step", type=int, default=3)
     parser.add_argument("--atom-size", type=int, default=51)
-    parser.add_argument("--v-min", type=float, default=-40.0)
+    parser.add_argument("--v-min", type=float, default=-50.0)
     parser.add_argument("--v-max", type=float, default=10.0)
     parser.add_argument("--eval-episodes", type=int, default=50)
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"])
-    parser.add_argument("--run-dir", type=str, default="runs/hw3_4_bonus")
-    parser.add_argument("--model-path", type=str, default="runs/hw3_4_bonus/model.pt")
+    parser.add_argument("--run-dir", type=str, default="runs/hw3_4_tuned")
+    parser.add_argument("--model-path", type=str, default="runs/hw3_4_tuned/model.pt")
     args = parser.parse_args()
     return TrainConfig(
         episodes=args.episodes,

@@ -133,7 +133,7 @@
 - NoisyNet
 - 環境：random mode
 
-### 設定摘要
+### 設定摘要（baseline）
 
 | 項目 | 值 |
 |---|---|
@@ -148,18 +148,38 @@
 | C51 support | [-40, 10] |
 | Device | cuda |
 
-### 結果
+### 設定摘要（tuned，最終採用）
 
-| 指標 | 數值 |
-|---|---:|
-| Eval win rate | 0.08 |
-| Eval avg reward | -29.16 |
-| Last-100 win rate | 0.23 |
-| Last-100 avg reward | -20.27 |
+| 項目 | 值 |
+|---|---|
+| Episodes | 1200 |
+| Max steps per episode | 35 |
+| Gamma | 0.95 |
+| Learning rate | 0.0002 |
+| Target sync | every 150 episodes |
+| PER alpha | 0.6 |
+| PER beta | 0.4 -> 1.0（2400 episodes） |
+| N-step | 3 |
+| C51 atoms | 51 |
+| C51 support | [-50, 10] |
+| Grad clip | 0.5 |
+| LR scheduler | step size 4000, gamma 0.9 |
+| Device | cuda |
 
-### 分析重點
+### 結果（含調參比較）
 
-工程上已完成完整 Rainbow 整合，但在這次 random 設定下仍未超過 3-3，顯示 random mode 對超參數與訓練配置高度敏感。
+| Run | Eval win rate | Eval avg reward | Last-100 win rate | Last-100 avg reward |
+|---|---:|---:|---:|---:|
+| baseline (`runs/hw3_4_bonus`) | 0.08 | -29.16 | 0.23 | -20.27 |
+| tune_a (`runs/hw3_4_tune_a`) | 0.22 | -21.52 | 0.33 | -15.46 |
+| tune_b (`runs/hw3_4_tune_b`) | **0.28** | **-15.24** | 0.24 | -16.95 |
+| tune_c (`runs/hw3_4_tune_c`) | 0.14 | -19.48 | 0.31 | -13.71 |
+| tune_b 長訓練 1800 (`runs/hw3_4_tuned_final`) | 0.22 | -15.74 | 0.24 | -13.26 |
+
+### 觀察重點
+
+完整 Rainbow 的工程整合已完成；在 random mode 中，超參數對結果影響很大。  
+目前最佳泛化表現來自 `tune_b`（1200 episodes），而不是更長訓練的版本。
 
 ---
 
@@ -171,13 +191,14 @@
 | 3-2（player, Double） | 1500 | 1.00 | 6.54 | 1.00 | 6.17 |
 | 3-2（player, Dueling） | 1500 | 1.00 | 6.98 | 1.00 | 6.44 |
 | 3-3（random, Lightning） | 1200 | 0.14 | -22.22 | 0.26 | -19.00 |
-| 3-4（random, Full Rainbow） | 1800 | 0.08 | -29.16 | 0.23 | -20.27 |
+| 3-4（random, Full Rainbow baseline） | 1800 | 0.08 | -29.16 | 0.23 | -20.27 |
+| 3-4（random, Full Rainbow tuned） | 1200 | 0.28 | -15.24 | 0.24 | -16.95 |
 
 ### 總結
 
 - 在 static / player 環境，DQN 與其變體能穩定收斂，其中 Dueling 在 player 表現最佳。
-- random 環境難度明顯更高；目前最好的 random 結果是 Part 3。
-- 完整 Rainbow 已完成實作，但要在 random mode 取得實質提升，仍需要微調超參數與方法擴充。
+- random 環境難度明顯更高，但本次調參後 3-4 已超過 3-3 的 eval 指標。
+- 若要更穩定比較，建議下一步做 multi-seed 平均（例如 3-5 個 seed）。
 
 ---
 
@@ -187,3 +208,4 @@
 - 3-2: `runs/hw3_2/double/`, `runs/hw3_2/dueling/`
 - 3-3: `runs/hw3_3/`
 - 3-4: `runs/hw3_4_bonus/`
+- 3-4 tuning: `runs/hw3_4_tune_a/`, `runs/hw3_4_tune_b/`, `runs/hw3_4_tune_c/`, `runs/hw3_4_tuned_final/`
