@@ -1,0 +1,25 @@
+{
+  "config": {
+    "variant": "double",
+    "episodes": 1500,
+    "max_steps_per_episode": 40,
+    "seed": 42,
+    "gamma": 0.9,
+    "learning_rate": 0.001,
+    "epsilon_start": 1.0,
+    "epsilon_end": 0.05,
+    "epsilon_decay_steps": 1500,
+    "target_sync_every": 25,
+    "replay_capacity": 2000,
+    "batch_size": 64,
+    "eval_episodes": 50,
+    "device": "auto",
+    "run_dir": "runs/hw3_2/double",
+    "model_path": "runs/hw3_2/double/model.pt"
+  },
+  "final_train_reward": 4.0,
+  "final_train_win": 1.0,
+  "eval_win_rate": 1.0,
+  "eval_avg_reward": 6.54,
+  "device_used": "cuda"
+}
